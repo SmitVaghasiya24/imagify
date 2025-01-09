@@ -6,7 +6,11 @@ import userRouter from './routes/userRoutes.js';
 import imageRouter from './routes/imageRoutes.js';
 import path from 'path'
 
-
+const corsOption = {
+    origin: "https://imagify-p4zz.onrender.com",
+    Credential:true
+}
+app.use(cors(corsOption))
 
 const PORT = process.env.PORT || 4000;
 const app = express()
@@ -14,7 +18,6 @@ const app = express()
 const _dirname = path.resolve();
 
 app.use(express.json())
-app.use(cors())
 await connectDB();
 
 app.use('/api/user',userRouter)
