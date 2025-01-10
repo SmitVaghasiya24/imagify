@@ -8,7 +8,7 @@ import axios from 'axios'
 
 const BuyCredit = () => {
 
-  const { user, backendUrl, loadCreditsData, token, setShowLogin } = useContext(AppContext)
+  const { user, loadCreditsData, token, setShowLogin } = useContext(AppContext)
 
 
   const navigate = useNavigate();
@@ -24,7 +24,7 @@ const BuyCredit = () => {
       receipt: order.receipt,
       handler: async (response) => {
         try {
-          const { data } = await axios.post(backendUrl + '/api/user/verify-razor', response, { headers: { token } })
+          const { data } = await axios.post('https://imagify-p4zz.onrender.com/api/user/verify-razor', response, { headers: { token } })
           if (data.success) {
 
             navigate('/')
@@ -46,7 +46,7 @@ const BuyCredit = () => {
       if (!user) {
         setShowLogin(true)
       }
-      const { data } = await axios.post(backendUrl + '/api/user/pay-razor', { planId }, { headers: { token } })
+      const { data } = await axios.post('https://imagify-p4zz.onrender.com/api/user/pay-razor', { planId }, { headers: { token } })
       if (data.success) {
         initPay(data.order)
       }

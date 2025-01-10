@@ -12,16 +12,12 @@ const AppContextProvider = (props) => {
     const [token, setToken] = useState(localStorage.getItem('token'))
     const [credit, setCredit] = useState(false)
 
-
-
-    const backendUrl = 'https://imagify-p4zz.onrender.com'
-
     const navigate = useNavigate()
 
 
     const loadCreditsData = useCallback(async () => {
         try {
-            const { data } = await axios.get(backendUrl + '/api/user/credits', { headers: { token } });
+            const { data } = await axios.get('https://imagify-p4zz.onrender.com/api/user/credits', { headers: { token } });
             if (data.success) {
                 setCredit(data.credits);
                 setUser(data.user);
@@ -30,7 +26,7 @@ const AppContextProvider = (props) => {
             console.log(error);
             toast.error(error.message);
         }
-    }, [token, backendUrl]);
+    }, [token]);
 
     const generateImage = async (prompt) => {
 
@@ -41,7 +37,7 @@ const AppContextProvider = (props) => {
         }
 
         try {
-            const { data } = await axios.post(backendUrl + '/api/image/generate-image', { prompt }, { headers: { token } });
+            const { data } = await axios.post('https://imagify-p4zz.onrender.com/api/image/generate-image', { prompt }, { headers: { token } });
             if (data.success) {
                 loadCreditsData();
                 return data.resultImage;
@@ -77,7 +73,7 @@ const AppContextProvider = (props) => {
 
 
     const value = {
-        user, setUser, showLogin, setShowLogin, backendUrl, token, setToken, credit, setCredit, loadCreditsData, logout, generateImage
+        user, setUser, showLogin, setShowLogin, token, setToken, credit, setCredit, loadCreditsData, logout, generateImage
     }
 
     return (
