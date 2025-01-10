@@ -51,7 +51,7 @@ const AppContextProvider = (props) => {
             }
         } catch (error) {
             console.log(error.message);
-            toast.error('No credit balance');
+            toast.error('Invalid Prompt');
             navigate('/buy');
         }
     };
