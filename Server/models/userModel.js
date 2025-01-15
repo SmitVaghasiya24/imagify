@@ -16,7 +16,7 @@ const userSchema = new mongoose.Schema({
     },
     creditBalance:{
         type:Number,
-        default: 0
+        default: 2
     }
     
 })
